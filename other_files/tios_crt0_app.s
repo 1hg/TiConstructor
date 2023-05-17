@@ -39,18 +39,18 @@
    rst 0x28 ; bcall(_ClrLCDFull)
    .dw 0x4540
 
-   
+
    call gsinit
 
 
-   ld hl, #fix
-   push hl
+;   ld hl, #fix
+;   push hl
    ; tricks program into jumping to fix on last ret instead of returning to ti-os 
 
 
    ; run main code 
-   jp _main
-
+ ; jp _main
+   call _main ; just do the work!
    ; this fixes strangeness from apps closing
    ; since it is after a jp it will only be called once
 fix::  
