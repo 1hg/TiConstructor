@@ -47,17 +47,19 @@ void fputs(char* loc) __naked {
 		pop bc      ; and perserve
 		push bc     ; ret value
 		push hl     
-
+		push ix
 
 	the_char_loop_i_need_more_good_names_for_labels:
 		ld	a, (bc)
 		or a, a
-		ret z
+		jr	z, 001$
 		abcall(_VPutMap)
 		inc bc
 		jr the_char_loop_i_need_more_good_names_for_labels
-
-	__endasm;
+	001$:
+		pop ix
+		ret
+		__endasm;
 }
 // prints to screen while also quickly setting cursor stuff. 
 void println(char* loc){
